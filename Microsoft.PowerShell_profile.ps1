@@ -16,6 +16,7 @@ if (Test-Path($ChocolateyProfile)) {
 }
 
 # Check for Profile Updates
+<#
 function Update-Profile {
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
@@ -38,6 +39,7 @@ function Update-Profile {
     }
 }
 Update-Profile
+#>
 
 function Update-PowerShell {
     if (-not $global:canConnectToGitHub) {
@@ -257,7 +259,7 @@ Set-PSReadLineOption -Colors @{
 }
 
 ## Final Line to set prompt
-oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
+oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/gruvbox.omp.json | Invoke-Expression
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
 } else {
