@@ -251,6 +251,8 @@ function cpy { Set-Clipboard $args[0] }
 
 function pst { Get-Clipboard }
 
+function reset { clear && winfetch && z ~ }
+
 function vi { nvim @args }
 
 # Enhanced PowerShell Experience
