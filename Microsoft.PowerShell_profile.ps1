@@ -251,9 +251,13 @@ function cpy { Set-Clipboard $args[0] }
 
 function pst { Get-Clipboard }
 
-function reset { clear && winfetch && z ~ }
+function py { python @args }
+
+function reset { Clear-Host && winfetch && z ~ }
 
 function vi { nvim @args }
+
+function vim { nvim @args }
 
 # Enhanced PowerShell Experience
 Set-PSReadLineOption -Colors @{
