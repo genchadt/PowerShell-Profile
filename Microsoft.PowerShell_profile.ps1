@@ -255,7 +255,26 @@ function pst { Get-Clipboard }
 
 function py { python @args }
 
-function reset { Clear-Host && winfetch && z ~ }
+function quit { exit }
+
+function reset {
+    param(
+        [switch]$NoWinfetch
+    )
+    Clear-Host
+    if (-not $NoWinfetch) {
+        try {
+            winfetch
+        } catch {
+            Write-Host "winfetch failed to run: $_"
+        }
+    }
+    try {
+        z ~
+    } catch {
+        Write-Host "Failed to navigate to home directory: $_"
+    }
+}
 
 function vi { nvim @args }
 
