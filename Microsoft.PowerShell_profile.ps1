@@ -113,11 +113,12 @@ function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
 # System Utilities
 function uptime {
-    if ($PSVersionTable.PSVersion.Major -eq 5) {
-        Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
-    } else {
-        net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
-    }
+    $os = Get-CimInstance Win32_OperatingSystem
+    $lastBootUpTime = $os.LastBootUpTime
+    $uptime = (Get-Date) - $lastBootUpTime
+    Write-Output ("Last Boot Time: {0}" -f $lastBootUpTime)
+    Write-Output ("System Uptime: {0} days, {1} hours, {2} minutes" -f `
+        [int]$uptime.TotalDays, $uptime.Hours, $uptime.Minutes)
 }
 
 function reload-profile {
@@ -299,3 +300,5 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
         Write-Error "Failed to install zoxide. Error: $_"
     }
 }
+
+Set-Alias -Name up -Value uptime
