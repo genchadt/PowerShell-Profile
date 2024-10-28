@@ -121,7 +121,7 @@ function uptime {
         [int]$uptime.TotalDays, $uptime.Hours, $uptime.Minutes)
 }
 
-function reload-profile {
+function Sync-Profile {
     . $profile
 }
 
