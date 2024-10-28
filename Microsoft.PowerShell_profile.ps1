@@ -41,7 +41,6 @@ function Update-Profile {
 Update-Profile
 #>
 
-<#
 function Update-PowerShell {
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping PowerShell update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
@@ -71,8 +70,6 @@ function Update-PowerShell {
     }
 }
 Update-PowerShell
-#>
-
 
 # Admin Check and Prompt Customization
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
