@@ -101,6 +101,11 @@ Set-Alias -Name vim -Value $EDITOR
 function Edit-Profile {
     vim $PROFILE.CurrentUserAllHosts
 }
+
+function Sync-Profile {
+    . $profile
+}
+
 function touch($file) { "" | Out-File $file -Encoding ASCII }
 function ff($name) {
     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
@@ -119,10 +124,6 @@ function uptime {
     Write-Output ("Last Boot Time: {0}" -f $lastBootUpTime)
     Write-Output ("System Uptime: {0} days, {1} hours, {2} minutes" -f `
         [int]$uptime.TotalDays, $uptime.Hours, $uptime.Minutes)
-}
-
-function Sync-Profile {
-    . $profile
 }
 
 function unzip ($file) {
