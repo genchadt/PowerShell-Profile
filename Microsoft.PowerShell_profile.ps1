@@ -106,7 +106,10 @@ function Sync-Profile {
     . $profile
 }
 
-function touch($file) { "" | Out-File $file -Encoding ASCII }
+function touch($file) {
+    New-Item -ItemType File -Path $file -Force | Out-Null
+}
+
 function ff($name) {
     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
         Write-Output "$($_.directory)\$($_)"
