@@ -114,7 +114,7 @@ function ff($name) {
 }
 
 # Network Utilities
-function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+function Get-PublicIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
 # System Utilities
 function uptime {
