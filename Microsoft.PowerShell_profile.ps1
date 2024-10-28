@@ -122,7 +122,7 @@ function uptime {
 }
 
 function reload-profile {
-    & $profile
+    . $profile
 }
 
 function unzip ($file) {
