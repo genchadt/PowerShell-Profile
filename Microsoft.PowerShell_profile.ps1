@@ -117,7 +117,7 @@ function ff($name) {
 function Get-PublicIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
 # System Utilities
-function uptime {
+function Get-Uptime {
     $os = Get-CimInstance Win32_OperatingSystem
     $lastBootUpTime = $os.LastBootUpTime
     $uptime = (Get-Date) - $lastBootUpTime
@@ -125,6 +125,8 @@ function uptime {
     Write-Output ("System Uptime: {0} days, {1} hours, {2} minutes" -f `
         [int]$uptime.TotalDays, $uptime.Hours, $uptime.Minutes)
 }
+Set-Alias -Name up -Value Get-Uptime
+Set-Alias -Name uptime -Value Get-Uptime
 
 function unzip ($file) {
     Write-Output("Extracting", $file, "to", $pwd)
@@ -301,5 +303,3 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
         Write-Error "Failed to install zoxide. Error: $_"
     }
 }
-
-Set-Alias -Name up -Value uptime
