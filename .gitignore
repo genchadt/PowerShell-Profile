@@ -1,3 +1,5 @@
 *
 !.gitignore
 !Microsoft.PowerShell_profile.ps1
+!Themes/
+!Themes/*.json
