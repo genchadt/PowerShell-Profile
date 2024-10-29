@@ -58,7 +58,7 @@ function Update-Profile {
 Update-Profile
 #>
 
-<# function Update-PowerShell {
+function Update-PowerShell {
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping PowerShell update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
@@ -87,7 +87,6 @@ Update-Profile
     }
 }
 Update-PowerShell 
-#>
 
 # Admin Check and Prompt Customization
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -310,7 +309,13 @@ Set-PSReadLineOption -Colors @{
 }
 
 ## Final Line to set prompt
-oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/gruvbox.omp.json' | Invoke-Expression
+try {
+    oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\Themes\gruvbox.omp.json" | Invoke-Expression
+}
+catch {
+    Write-Host "oh-my-posh failed to run: $_"
+}
+
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
 } else {
